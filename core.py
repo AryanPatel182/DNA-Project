@@ -35,17 +35,7 @@ class Symbol:
         print("symbol_{} degree={}\t {}".format(self.index, self.degree, neighbors))
 
 def generate_indexes(symbol_index, degree, blocks_quantity):
-    """Randomly get `degree` indexes, given the symbol index as a seed
-
-    Generating with a seed allows saving only the seed (and the amount of degrees) 
-    and not the whole array of indexes. That saves memory, but also bandwidth when paquets are sent.
-
-    The random indexes need to be unique because the decoding process uses dictionnaries for performance enhancements.
-    Additionnally, even if XORing one block with itself among with other is not a problem for the algorithm, 
-    it is better to avoid uneffective operations like that.
-
-    To be sure to get the same random indexes, we need to pass 
-    """
+    
     if SYSTEMATIC and symbol_index < blocks_quantity:
         indexes = [symbol_index]               
         degree = 1     
@@ -56,7 +46,6 @@ def generate_indexes(symbol_index, degree, blocks_quantity):
     return indexes, degree
 
 def log(process, iteration, total, start_time):
-    """Log the processing in a gentle way, each seconds"""
     global log_actual_time
     
     if "log_actual_time" not in globals():

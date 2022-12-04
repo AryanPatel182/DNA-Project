@@ -191,9 +191,7 @@ if __name__ == "__main__":
             for symbol in file_symbols:
                 symbol.data = convertToACGT(symbol.data)
                 encodetxt.insert(END, symbol.data)
-            
-            # HERE: Simulating the loss of packets?
-            
+                        
             # ######################################################################################################
 
             for symbol in file_symbols:

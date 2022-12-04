@@ -1,10 +1,7 @@
 from core import *
 
 def recover_graph(symbols, blocks_quantity):
-    """ Get back the same random indexes (or neighbors), thanks to the symbol id as seed.
-    For an easy implementation purpose, we register the indexes as property of the Symbols objects.
-    """
-
+    
     for symbol in symbols:
         
         neighbors, deg = generate_indexes(symbol.index, symbol.degree, blocks_quantity)
@@ -17,12 +14,6 @@ def recover_graph(symbols, blocks_quantity):
     return symbols
 
 def reduce_neighbors(block_index, blocks, symbols):
-    """ Loop over the remaining symbols to find for a common link between 
-    each symbol and the last solved block `block`
-
-    To avoid increasing complexity and another for loop, the neighbors are stored as dictionnary
-    which enable to directly delete the entry after XORing back.
-    """
     
     for other_symbol in symbols:
         if other_symbol.degree > 1 and block_index in other_symbol.neighbors:
@@ -38,21 +29,6 @@ def reduce_neighbors(block_index, blocks, symbols):
 
 
 def decode(symbols, blocks_quantity):
-    """ Iterative decoding - Decodes all the passed symbols to build back the data as blocks. 
-    The function returns the data at the end of the process.
-    
-    1. Search for an output symbol of degree one
-        (a) If such an output symbol y exists move to step 2.
-        (b) If no output symbols of degree one exist, iterative decoding exits and decoding fails.
-    
-    2. Output symbol y has degree one. Thus, denoting its only neighbour as v, the
-        value of v is recovered by setting v = y.
-
-    3. Update.
-
-    4. If all k input symbols have been recovered, decoding is successful and iterative
-        decoding ends. Otherwise, go to step 1.
-    """
 
     symbols_n = len(symbols)
     assert symbols_n > 0, "There are no symbols to decode."

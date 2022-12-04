@@ -2,11 +2,7 @@ from core import *
 from distributions import *
 
 def get_degrees_from(distribution_name, N, k):
-    """ Returns the random degrees from a given distribution of probabilities.
-    The degrees distribution must look like a Poisson distribution and the 
-    degree of the first drop is 1 to ensure the start of decoding.
-    """
-
+    
     if distribution_name == "ideal":
         probabilities = ideal_distribution(N)
     elif distribution_name == "robust":
@@ -18,18 +14,6 @@ def get_degrees_from(distribution_name, N, k):
     return [1] + choices(population, probabilities, k=k-1)
    
 def encode(blocks, drops_quantity):
-    """ Iterative encoding - Encodes new symbols and yield them.
-    Encoding one symbol is described as follow:
-
-    1.  Randomly choose a degree according to the degree distribution, save it into "deg"
-        Note: below we prefer to randomly choose all the degrees at once for our symbols.
-
-    2.  Choose uniformly at random 'deg' distinct input blocs. 
-        These blocs are also called "neighbors" in graph theory.
-    
-    3.  Compute the output symbol as the combination of the neighbors.
-        In other means, we XOR the chosen blocs to produce the symbol.
-    """
 
     # Display statistics
     blocks_n = len(blocks)

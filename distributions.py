@@ -1,11 +1,6 @@
 from core import *
 
 def ideal_distribution(N):
-    """ Create the ideal soliton distribution. 
-    In practice, this distribution gives not the best results
-    Cf. https://en.wikipedia.org/wiki/Soliton_distribution
-    """
-
     probabilities = [0, 1 / N]
     probabilities += [1 / (k * (k - 1)) for k in range(2, N+1)]
     probabilities_sum = sum(probabilities)
@@ -14,10 +9,6 @@ def ideal_distribution(N):
     return probabilities
 
 def robust_distribution(N):
-    """ Create the robust soliton distribution. 
-    This fixes the problems of the ideal distribution
-    Cf. https://en.wikipedia.org/wiki/Soliton_distribution
-    """
 
     # The choice of M is not a part of the distribution ; it may be improved
     # We take the median and add +1 to avoid possible division by zero 
